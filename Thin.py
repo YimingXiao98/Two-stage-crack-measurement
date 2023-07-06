@@ -15,28 +15,28 @@ args, unknown = parser.parse_known_args()
 
 dir = args.dir
 
-# 定义要遍历的文件夹路径
-input_folder = f'./{dir}/mask/'
+# Define the input folder
+input_folder = f'./{dir}/Mask/'
 
-# 定义输出文件夹路径
-output_folder = f'./{dir}/skeletonized/'
+# Define the output folder
+output_folder = f'./{dir}/Skeletonized/'
 
-# 获取文件夹中所有jpg和png文件的路径
+# Get the path of all the images in the input folder
 file_paths = glob.glob(os.path.join(input_folder, '*.jpg')) + \
              glob.glob(os.path.join(input_folder, '*.png'))
 
 for file_path in file_paths:
-    # 读取图像
+    # Read the image
     image = cv2.imread(file_path)
 
-    # 骨架化
+    # Skeletonize it
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     _, thresh = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
 
     thinned = thin(thresh)
-    # 获取输出文件路径
+    # Get out put path
     output_path = os.path.join(output_folder, os.path.basename(file_path).split('.')[0] + '.png')
     thinned = np.uint8(thinned) * 255
-    # 保存图像
+    # Save image
     cv2.imwrite(output_path, thinned)

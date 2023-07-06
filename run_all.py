@@ -1,5 +1,7 @@
-import Detect_pred
+import create_folder
+import move
+import detect_pred
 import rectangular
 import run_show_results__
-import Thin
-import Measure
+import thin
+import measure

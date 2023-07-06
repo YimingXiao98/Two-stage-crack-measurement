@@ -12,7 +12,7 @@ from tqdm import tqdm
 import torch
 
 # Load the trained model, you could possibly change the device from cpu to gpu if 
-# you have your gpu configured.
+# you have your gpu configured
 
 today = datetime.date.today().strftime("%m-%d")
 
@@ -23,14 +23,14 @@ args, unknown = parser.parse_known_args()
 
 dir = args.dir
 
-model = torch.load(f'./weights_38.pt', map_location=torch.device('cuda'))
+model = torch.load(f'./seg_weight.pt', map_location=torch.device('cuda'))
 # model = torch.load(f'../Training-Testing//weights_20.pt', map_location=torch.device('cuda'))
 # Set the model to evaluate mode
 model.eval()
 
-source_image_dir = f'./{dir}/decropped/'
-destination_mask = f'./{dir}/mask/'
-destination_overlays = f'./{dir}/overlay/'
+source_image_dir = f'./{dir}/Decropped/'
+destination_mask = f'./{dir}/Mask/'
+destination_overlays = f'./{dir}/Overlay/'
 
 for image_name in tqdm(os.listdir(source_image_dir)):
     print(image_name)
