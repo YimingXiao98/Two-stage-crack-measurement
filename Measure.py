@@ -43,10 +43,10 @@ for file_path in file_paths_skel:
     image = cv2.imread(file_path, cv2.IMREAD_GRAYSCALE)
 
     # Get the medial axis
-    skeleton, distance = medial_axis(image, return_distance=True)
+    #skeleton, distance = medial_axis(image, return_distance=True)
 
     # Calculate the length in pixels
-    length_o = np.sum(distance * skeleton)
+    length_o = cv2.countNonZero(image)
 
     # Convert into real world length
     length = length_o * scale

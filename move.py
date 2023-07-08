@@ -13,5 +13,6 @@ for file in files:
     if file.lower().endswith(('.jpg', '.jpeg', '.png')):
         s_path = os.path.join(sdir, file)
         d_path = os.path.join(ddir, file)
+        shutil.copy(s_path, d_path)
 
-    shutil.copy(s_path, d_path)
+    
