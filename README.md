@@ -33,14 +33,14 @@ To begin with, put the original images that you would like to perform the measur
 
 It will do the following jobs:
 
-1. Create seven folders to store results of every stage. (`create_folder.py`)
-2. Perform object detection (in this scenario, the object is the crack). (`Thin.py`)
+1. Create six folders to store results of every stage. (`create_folder.py`)
+2. Perform object detection (in this scenario, the object is the crack). (`detect_pred.py`)
 3. Crop the detected cracks and store them in to the folder `detected\`. (`detect_pred.py`)
 4. Perform segmentation task, generating predicted masks and overlays. (`run_show_results__.py`)
 5. Skeletonize the masks. (`thin.py`)
 6. Calculate the pixel-wise square and length of the cracks based on the number of white pixels in a skeletonized mask, then divide them to get the average crack width. (`measure.py`)
 
-Note that the length by default is **pixel-wised**, meaning currently it is not able to represent the actual length of the cracks in real world if you do not explicitly determine the conversion scale. 
+Note that the length by default is **pixel-wised**, meaning currently it is not able to represent the actual length of the cracks in the real world if you do not explicitly determine the conversion scale. 
 
 If you have the conversion scale of the images, rename your images such that the scale (< 1) is at the end of your images' file names without suffixes, e.g. `image_12.61.png`, where 12.61 is your conversion scale. Then the scripts should read the scale correctly.
 # Acknowledgements
