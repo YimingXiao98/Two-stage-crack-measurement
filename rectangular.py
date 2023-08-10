@@ -28,6 +28,6 @@ for img_name in img_list:
     width, height = img.size  
     max_size = max(width, height)  
     square_img = Image.new('RGB', (max_size, max_size), (0, 0, 0))  # Get a square image that is whole black
-    square_img.paste(img, (int((max_size - width) / 2), int((max_size - height) / 2)))  # paste the crack image on the center
+    square_img.paste(img, (int((max_size - width) / 2), int((max_size - height) / 2)))  # Paste the crack image on the center
     resized_img = square_img.resize((w, h), Image.ANTIALIAS)  # Adjust the size to 512
-    square_img.save(f'./{dir}/Decropped/' + img_name) #Save
+    square_img.save(f'./{dir}/Decropped/' + img_name)

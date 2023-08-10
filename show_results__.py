@@ -25,7 +25,9 @@ def generate_images(model, image_path, name, destination_mask, destination_overl
     # image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     # cv2.imshow('show', image)
     # cv2.waitKey(0)
+
     width, height = image.shape[1], image.shape[0]
+    '''
     min_ = min(width, height)
     dim = [min_, min_]
     # process crop width and height for max available dimension
@@ -34,9 +36,11 @@ def generate_images(model, image_path, name, destination_mask, destination_overl
     mid_x, mid_y = int(width / 2), int(height / 2)
     cw2, ch2 = int(crop_width / 2), int(crop_height / 2)
     crop_img = image[mid_y - ch2:mid_y + ch2, mid_x - cw2:mid_x + cw2]
-    image = cv2.resize(crop_img, (512, 512), interpolation=cv2.INTER_NEAREST)
+    print(crop_img.shape)
+    # image = cv2.resize(crop_img, (512, 512), interpolation=cv2.INTER_NEAREST)
+    '''
     img = image.transpose(2, 0, 1)
-    img = img.reshape(1, 3, 512, 512)
+    img = img.reshape(1, 3, height, width)
 
     with torch.no_grad():
         mask_pred = model(torch.from_numpy(img).type(torch.cuda.FloatTensor))
@@ -47,9 +51,11 @@ def generate_images(model, image_path, name, destination_mask, destination_overl
     # 1 = crack
     # ---------------------------------------------------------------------
     import numpy as np
-    mapping_1 = {0: np.array([0, 0, 0], dtype=np.uint8), 1: np.array([255, 255, 255], dtype=np.uint8)}
+    mapping_1 = {0: np.array([0, 0, 0], dtype=np.uint8), 1: np.array(
+        [255, 255, 255], dtype=np.uint8)}
 
-    mapping_2 = {0: np.array([0, 0, 0], dtype=np.uint8), 1: np.array([0, 0, 128], dtype=np.uint8)}
+    mapping_2 = {0: np.array([0, 0, 0], dtype=np.uint8),
+                 1: np.array([0, 0, 128], dtype=np.uint8)}
 
     y_pred_tensor = mask_pred
     pred = torch.argmax(y_pred_tensor, dim=1)

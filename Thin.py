@@ -23,7 +23,7 @@ output_folder = f'./{dir}/Skeletonized/'
 
 # Get the path of all the images in the input folder
 file_paths = glob.glob(os.path.join(input_folder, '*.jpg')) + \
-             glob.glob(os.path.join(input_folder, '*.png'))
+    glob.glob(os.path.join(input_folder, '*.png'))
 
 for file_path in file_paths:
     # Read the image
@@ -36,7 +36,8 @@ for file_path in file_paths:
 
     thinned = thin(thresh)
     # Get out put path
-    output_path = os.path.join(output_folder, os.path.basename(file_path).split('.')[0] + '.png')
+    output_path = os.path.join(output_folder, os.path.basename(
+        file_path))
     thinned = np.uint8(thinned) * 255
     # Save image
     cv2.imwrite(output_path, thinned)
