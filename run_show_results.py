@@ -7,7 +7,7 @@ Created on Fri Dec 11 13:48:39 2020
 import argparse
 import datetime
 import os
-from show_results__ import *
+from show_results import *
 from tqdm import tqdm
 import torch
 
