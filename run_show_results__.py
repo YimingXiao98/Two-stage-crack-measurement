@@ -22,8 +22,10 @@ parser.add_argument("--dir", "-d", type=str, default=f"{today}", help="dir")
 args, unknown = parser.parse_known_args()
 
 dir = args.dir
-
-model = torch.load(f"./seg_weight.pt", map_location=torch.device("cuda"))
+if torch.cuda.is_available():
+    model = torch.load(f"./seg_weight.pt", map_location=torch.device("cuda"))
+else:
+    model = torch.load(f"./seg_weight.pt", map_location=torch.device("cpu"))
 # model = torch.load(f"../Training-Testing//weights_20.pt", map_location=torch.device("cuda"))
 # Set the model to evaluate mode
 model.eval()

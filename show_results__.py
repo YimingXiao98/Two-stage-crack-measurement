@@ -43,7 +43,10 @@ def generate_images(model, image_path, name, destination_mask, destination_overl
     img = img.reshape(1, 3, height, width)
 
     with torch.no_grad():
-        mask_pred = model(torch.from_numpy(img).type(torch.cuda.FloatTensor))
+        if torch.cuda.is_available():
+            mask_pred = model(torch.from_numpy(img).type(torch.cuda.FloatTensor))
+        else:
+            mask_pred = model(torch.from_numpy(img).type(torch.FloatTensor))
 
     # color mapping corresponding to classes
     # ---------------------------------------------------------------------

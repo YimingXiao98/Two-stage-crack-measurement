@@ -42,10 +42,14 @@ for file_path in file_paths_skel:
     # Read the image
     image = cv2.imread(file_path, cv2.IMREAD_GRAYSCALE)
     # Define the scale, by default is 1:1 (1 pixel equals to 1 millimeter)
-    # _, _, scl = file_path.split("_")
+    scale[i] = 1
+    try:
+        _, _, scl = file_path.split("_")
 
-    # scale[i] = scl.split(".")[0] + "." + scl.split(".")[1]
-    scale[i] = 1 / 0.13
+        scale[i] = scl.split(".")[0] + "." + scl.split(".")[1]
+    except ValueError:
+        pass
+    
     # Calculate the length in pixels
     length_o = cv2.countNonZero(image)
 
@@ -66,7 +70,7 @@ for file_path_mask in file_paths_mask:
     # Count the number of white pixels as the square
     num_white_pixels = cv2.countNonZero(image_mask)
 
-    S[i] = num_white_pixels / (scale[i]**2)
+    S[i] = num_white_pixels / float(scale[i]**2)
 
     i += 1
 
