@@ -27,7 +27,7 @@ and pull the two .pt files by
 
 Then you can install the requirement packages by
 
-`pip install -r requirements`
+`pip install -r requirements.txt`
 
 To begin with, put the original images that you would like to perform the measurement on in the `Original` folder. Then simply run `run_all.py`.
 
